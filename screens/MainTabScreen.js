@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -12,9 +12,9 @@ import ExploreScreen from './ExploreScreen';
 import ProfileScreen from './ProfileScreen';
 import EditProfileScreen from './EditProfileScreen';
 
-import {useTheme, Avatar} from 'react-native-paper';
-import {View} from 'react-native-animatable';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import { useTheme, Avatar } from 'react-native-paper';
+import { View } from 'react-native-animatable';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import CardListScreen from './CardListScreen';
 import CardItemDetails from './CardItemDetails';
 
@@ -32,9 +32,9 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: 'Home',
         tabBarColor: '#FF6347',
-        tabBarIcon: ({color}) => (
+        tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
-        ),
+        )
       }}
     />
     <Tab.Screen
@@ -43,9 +43,9 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: 'Updates',
         tabBarColor: '#1f65ff',
-        tabBarIcon: ({color}) => (
+        tabBarIcon: ({ color }) => (
           <Icon name="ios-notifications" color={color} size={26} />
-        ),
+        )
       }}
     />
     <Tab.Screen
@@ -54,9 +54,9 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: 'Profile',
         tabBarColor: '#694fad',
-        tabBarIcon: ({color}) => (
+        tabBarIcon: ({ color }) => (
           <Icon name="ios-person" color={color} size={26} />
-        ),
+        )
       }}
     />
     <Tab.Screen
@@ -65,9 +65,9 @@ const MainTabScreen = () => (
       options={{
         tabBarLabel: 'Explore',
         tabBarColor: '#d02860',
-        tabBarIcon: ({color}) => (
+        tabBarIcon: ({ color }) => (
           <Icon name="ios-aperture" color={color} size={26} />
-        ),
+        )
       }}
     />
   </Tab.Navigator>
@@ -75,20 +75,20 @@ const MainTabScreen = () => (
 
 export default MainTabScreen;
 
-const HomeStackScreen = ({navigation}) => {
-  const {colors} = useTheme();
+const HomeStackScreen = ({ navigation }) => {
+  const { colors } = useTheme();
   return (
     <HomeStack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: colors.background,
           shadowColor: colors.background, // iOS
-          elevation: 0, // Android
+          elevation: 0 // Android
         },
         headerTintColor: colors.text,
         headerTitleStyle: {
-          fontWeight: 'bold',
-        },
+          fontWeight: 'bold'
+        }
       }}>
       <HomeStack.Screen
         name="Home"
@@ -96,7 +96,7 @@ const HomeStackScreen = ({navigation}) => {
         options={{
           title: 'FoodFinder',
           headerLeft: () => (
-            <View style={{marginLeft: 10}}>
+            <View style={{ marginLeft: 10 }}>
               <Icon.Button
                 name="ios-menu"
                 size={25}
@@ -107,7 +107,7 @@ const HomeStackScreen = ({navigation}) => {
             </View>
           ),
           headerRight: () => (
-            <View style={{flexDirection: 'row', marginRight: 10}}>
+            <View style={{ flexDirection: 'row', marginRight: 10 }}>
               <Icon.Button
                 name="ios-search"
                 size={25}
@@ -116,28 +116,27 @@ const HomeStackScreen = ({navigation}) => {
                 onPress={() => {}}
               />
               <TouchableOpacity
-                style={{paddingHorizontal: 10, marginTop: 5}}
+                style={{ paddingHorizontal: 10, marginTop: 5 }}
                 onPress={() => {
                   navigation.navigate('Profile');
                 }}>
                 <Avatar.Image
                   source={{
-                    uri:
-                      'https://api.adorable.io/avatars/80/abott@adorable.png',
+                    uri: 'https://api.adorable.io/avatars/80/abott@adorable.png'
                   }}
                   size={30}
                 />
               </TouchableOpacity>
             </View>
-          ),
+          )
         }}
       />
       <HomeStack.Screen
         name="CardListScreen"
         component={CardListScreen}
-        options={({route}) => ({
+        options={({ route }) => ({
           title: route.params.title,
-          headerBackTitleVisible: false,
+          headerBackTitleVisible: false
         })}
       />
       <HomeStack.Screen
@@ -148,23 +147,23 @@ const HomeStackScreen = ({navigation}) => {
           headerBackTitleVisible: false,
           headerTitle: false,
           headerTransparent: true,
-          headerTintColor: '#fff',
+          headerTintColor: '#fff'
         })}
       />
     </HomeStack.Navigator>
   );
 };
 
-const NotificationStackScreen = ({navigation}) => (
+const NotificationStackScreen = ({ navigation }) => (
   <NotificationStack.Navigator
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#1f65ff',
+        backgroundColor: '#1f65ff'
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontWeight: 'bold',
-      },
+        fontWeight: 'bold'
+      }
     }}>
     <NotificationStack.Screen
       name="Notifications"
@@ -177,14 +176,14 @@ const NotificationStackScreen = ({navigation}) => (
             backgroundColor="#1f65ff"
             onPress={() => navigation.openDrawer()}
           />
-        ),
+        )
       }}
     />
   </NotificationStack.Navigator>
 );
 
-const ProfileStackScreen = ({navigation}) => {
-  const {colors} = useTheme();
+const ProfileStackScreen = ({ navigation }) => {
+  const { colors } = useTheme();
 
   return (
     <ProfileStack.Navigator
@@ -192,9 +191,9 @@ const ProfileStackScreen = ({navigation}) => {
         headerStyle: {
           backgroundColor: colors.background,
           shadowColor: colors.background, // iOS
-          elevation: 0, // Android
+          elevation: 0 // Android
         },
-        headerTintColor: colors.text,
+        headerTintColor: colors.text
       }}>
       <ProfileStack.Screen
         name="Profile"
@@ -202,7 +201,7 @@ const ProfileStackScreen = ({navigation}) => {
         options={{
           title: '',
           headerLeft: () => (
-            <View style={{marginLeft: 10}}>
+            <View style={{ marginLeft: 10 }}>
               <Icon.Button
                 name="ios-menu"
                 size={25}
@@ -213,7 +212,7 @@ const ProfileStackScreen = ({navigation}) => {
             </View>
           ),
           headerRight: () => (
-            <View style={{marginRight: 10}}>
+            <View style={{ marginRight: 10 }}>
               <MaterialCommunityIcons.Button
                 name="account-edit"
                 size={25}
@@ -222,13 +221,13 @@ const ProfileStackScreen = ({navigation}) => {
                 onPress={() => navigation.navigate('EditProfile')}
               />
             </View>
-          ),
+          )
         }}
       />
       <ProfileStack.Screen
         name="EditProfile"
         options={{
-          title: 'Edit Profile',
+          title: 'Edit Profile'
         }}
         component={EditProfileScreen}
       />

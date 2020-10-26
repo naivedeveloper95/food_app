@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,21 +6,21 @@ import {
   Animated,
   TouchableHighlight,
   TouchableOpacity,
-  StatusBar,
+  StatusBar
 } from 'react-native';
 
-import {SwipeListView} from 'react-native-swipe-list-view';
+import { SwipeListView } from 'react-native-swipe-list-view';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Notifications from '../model/Notifications';
 
-const NotificationScreen = ({navigation}) => {
+const NotificationScreen = ({ navigation }) => {
   const [listData, setListData] = useState(
     Notifications.map((NotificationItem, index) => ({
       key: `${index}`,
       title: NotificationItem.title,
-      details: NotificationItem.details,
-    })),
+      details: NotificationItem.details
+    }))
   );
 
   const closeRow = (rowMap, rowKey) => {
@@ -32,45 +32,45 @@ const NotificationScreen = ({navigation}) => {
   const deleteRow = (rowMap, rowKey) => {
     closeRow(rowMap, rowKey);
     const newData = [...listData];
-    const prevIndex = listData.findIndex(item => item.key === rowKey);
+    const prevIndex = listData.findIndex((item) => item.key === rowKey);
     newData.splice(prevIndex, 1);
     setListData(newData);
   };
 
-  const onRowDidOpen = rowKey => {
+  const onRowDidOpen = (rowKey) => {
     console.log('This row opened', rowKey);
   };
 
-  const onLeftActionStatusChange = rowKey => {
+  const onLeftActionStatusChange = (rowKey) => {
     console.log('onLeftActionStatusChange', rowKey);
   };
 
-  const onRightActionStatusChange = rowKey => {
+  const onRightActionStatusChange = (rowKey) => {
     console.log('onRightActionStatusChange', rowKey);
   };
 
-  const onRightAction = rowKey => {
+  const onRightAction = (rowKey) => {
     console.log('onRightAction', rowKey);
   };
 
-  const onLeftAction = rowKey => {
+  const onLeftAction = (rowKey) => {
     console.log('onLeftAction', rowKey);
   };
 
-  const VisibleItem = props => {
+  const VisibleItem = (props) => {
     const {
       data,
       rowHeightAnimatedValue,
       removeRow,
       leftActionState,
-      rightActionState,
+      rightActionState
     } = props;
 
     if (rightActionState) {
       Animated.timing(rowHeightAnimatedValue, {
         toValue: 0,
         duration: 200,
-        useNativeDriver: false,
+        useNativeDriver: false
       }).start(() => {
         removeRow();
       });
@@ -78,7 +78,7 @@ const NotificationScreen = ({navigation}) => {
 
     return (
       <Animated.View
-        style={[styles.rowFront, {height: rowHeightAnimatedValue}]}>
+        style={[styles.rowFront, { height: rowHeightAnimatedValue }]}>
         <TouchableHighlight
           style={styles.rowFrontVisible}
           onPress={() => console.log('Element touched')}
@@ -108,7 +108,7 @@ const NotificationScreen = ({navigation}) => {
     );
   };
 
-  const HiddenItemWithActions = props => {
+  const HiddenItemWithActions = (props) => {
     const {
       swipeAnimatedValue,
       leftActionActivated,
@@ -116,23 +116,24 @@ const NotificationScreen = ({navigation}) => {
       rowActionAnimatedValue,
       rowHeightAnimatedValue,
       onClose,
-      onDelete,
+      onDelete
     } = props;
 
     if (rightActionActivated) {
       Animated.spring(rowActionAnimatedValue, {
         toValue: 500,
-        useNativeDriver: false,
+        useNativeDriver: false
       }).start();
     } else {
       Animated.spring(rowActionAnimatedValue, {
         toValue: 75,
-        useNativeDriver: false,
+        useNativeDriver: false
       }).start();
     }
 
     return (
-      <Animated.View style={[styles.rowBack, {height: rowHeightAnimatedValue}]}>
+      <Animated.View
+        style={[styles.rowBack, { height: rowHeightAnimatedValue }]}>
         <Text>Left</Text>
         {!leftActionActivated && (
           <TouchableOpacity
@@ -153,8 +154,8 @@ const NotificationScreen = ({navigation}) => {
               styles.backRightBtnRight,
               {
                 flex: 1,
-                width: rowActionAnimatedValue,
-              },
+                width: rowActionAnimatedValue
+              }
             ]}>
             <TouchableOpacity
               style={[styles.backRightBtn, styles.backRightBtnRight]}
@@ -168,11 +169,11 @@ const NotificationScreen = ({navigation}) => {
                         scale: swipeAnimatedValue.interpolate({
                           inputRange: [-90, -45],
                           outputRange: [1, 0],
-                          extrapolate: 'clamp',
-                        }),
-                      },
-                    ],
-                  },
+                          extrapolate: 'clamp'
+                        })
+                      }
+                    ]
+                  }
                 ]}>
                 <MaterialCommunityIcons
                   name="trash-can-outline"
@@ -233,10 +234,10 @@ export default NotificationScreen;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f4f4f4',
-    flex: 1,
+    flex: 1
   },
   backTextWhite: {
-    color: '#FFF',
+    color: '#FFF'
   },
   rowFront: {
     backgroundColor: '#FFF',
@@ -245,17 +246,17 @@ const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 15,
     shadowColor: '#999',
-    shadowOffset: {width: 0, height: 1},
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 5
   },
   rowFrontVisible: {
     backgroundColor: '#FFF',
     borderRadius: 5,
     height: 60,
     padding: 10,
-    marginBottom: 15,
+    marginBottom: 15
   },
   rowBack: {
     alignItems: 'center',
@@ -266,7 +267,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     margin: 5,
     marginBottom: 15,
-    borderRadius: 5,
+    borderRadius: 5
   },
   backRightBtn: {
     alignItems: 'flex-end',
@@ -275,31 +276,31 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: 75,
-    paddingRight: 17,
+    paddingRight: 17
   },
   backRightBtnLeft: {
     backgroundColor: '#1f65ff',
-    right: 75,
+    right: 75
   },
   backRightBtnRight: {
     backgroundColor: 'red',
     right: 0,
     borderTopRightRadius: 5,
-    borderBottomRightRadius: 5,
+    borderBottomRightRadius: 5
   },
   trash: {
     height: 25,
     width: 25,
-    marginRight: 7,
+    marginRight: 7
   },
   title: {
     fontSize: 14,
     fontWeight: 'bold',
     marginBottom: 5,
-    color: '#666',
+    color: '#666'
   },
   details: {
     fontSize: 12,
-    color: '#999',
-  },
+    color: '#999'
+  }
 });

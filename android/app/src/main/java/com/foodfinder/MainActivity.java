@@ -1,4 +1,4 @@
-package com.foodfinder;
+package com.food_app;
 
 import com.facebook.react.ReactActivity;
 

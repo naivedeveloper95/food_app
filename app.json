@@ -1,4 +1,6 @@
 {
-	"name": "FoodFinder",
-	"displayName": "FoodFinder"
+	"expo": {
+		"name": "FoodFinder",
+		"slug": "FoodFinder"
+	}
 }
